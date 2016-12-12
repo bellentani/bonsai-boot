@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<head>
+	<title>Front-End Dev Conference</title>
+	{{> head-scripts }}
+</head>
+<body>
+	{{> mol-bs-jumbotron title='Documentação do novo Ecom' description='Esta documentação já está utilizando Gulp e Handlebars' }}
+	<main class="main container">
+		<section>
+			<article>
+				<h1>Alerts e Progress Bars</h1>
+				<div class="row">
+					<div class="col-xs-24 col-sm-12">
+						{{> mol-bs-alert status='success' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod	tempor incididunt ut labore et dolore magna aliqua. '}}
+
+						{{> mol-bs-alert status='info' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '}}
+
+						{{> mol-bs-alert status='danger' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod	tempor incididunt ut labore et dolore magna aliqua. '}}
+
+						{{> mol-bs-alert status='warning' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod	tempor incididunt ut labore et dolore magna aliqua. '}}
+					</div>
+					<div class="col-xs-24 col-sm-12">
+						{{> mol-bs-progress-bar porcentagem='20' max='100' min='0' status='success'}}
+
+						{{> mol-bs-progress-bar porcentagem='40' max='100' min='0' status='info'}}
+
+						{{> mol-bs-progress-bar porcentagem='60' max='100' min='0' status='danger'}}
+
+						{{> mol-bs-progress-bar porcentagem='80' max='100' min='0' status='warning progress-bar-striped active'}}
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<h1>Labels, Badges e Buttons</h1>
+				<div class="row">
+					<div class="col-xs-24 col-sm-8">
+						{{> mol-bs-label}}
+					</div>
+
+					<div class="col-xs-24 col-sm-8">
+						{{> mol-bs-badge}}
+					</div>
+
+					<div class="col-xs-24 col-sm-8">
+						<p>
+							Você pode criar dois tipos de botões, sendo eles no formato <code>button</code> ou formato link <code>a</code>. Para isso, basta chamar o átomo correspondente na qual <code>atom-bs-btn-button</code> cria um buttom e <code>atom-bs-link-button</code> criar um link.  
+						</p>
+						<p>Ambos os formatos de botões tem os atributos <code>btn</code> para definir a cor do botão e <code>value</code> para definir o rótulo. O botão no formato <code>button</code> leva ainda o atributo <code>type</code> para definir o tipo de botão e o formato <code>link</code> leva o atributo <code>href</code></p>
+						<div class="form-group">
+							{{> atom-bs-btn-button btn='primary' type='button' value='Botão'}}
+							{{> atom-bs-btn-button btn='success' type='submit' value='Enviar'}}
+							{{> atom-bs-btn-button btn='warning' type='reset' value='Limpar'}}
+						</div>
+
+						<div class="form-group">
+							{{> atom-bs-link-button btn='primary' href='#' value='Botão'}}
+							{{> atom-bs-link-button btn='success' href='#' value='Enviar'}}
+							{{> atom-bs-link-button btn='warning' href='#' value='Limpar'}}
+						</div>					
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<h1>Tabs e Responsive Embeds</h1>
+				<div class="row">
+					<div class="col-xs-24 col-sm-12">
+						{{> mol-bs-tabs}}
+					</div>
+
+					<div class="col-xs-24 col-sm-12">
+						{{> mol-bs-responsive-embed width='100%' height='500' src='https://www.youtube.com/embed/QbtPmwL18uA'}}
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<h1>Panels e Collapse Group </h1>
+				<div class="row">
+					<div class="col-xs-24 col-sm-16">
+						<div class="col-xs-24 col-sm-12">
+							{{>mol-bs-panel class='success' title='Title here' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod' }}
+						</div>
+
+						<div class="col-xs-24 col-sm-12">
+							{{>mol-bs-panel class='warning' title='Title here' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod' }}
+						</div>
+
+						<div class="col-xs-24 col-sm-12">
+							{{>mol-bs-panel class='danger' title='Title here' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod' }}
+						</div>
+
+						<div class="col-xs-24 col-sm-12">
+							{{>mol-bs-panel class='primary' title='Title here' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod' }}
+						</div>
+					</div>					
+
+					<div class="col-xs-24 col-sm-8">
+						{{>mol-bs-collapse-group-panels title='Title One' id='id01' active='in' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'}}
+
+						{{>mol-bs-collapse-group-panels title='Title Two' id='id02' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'}}
+					</div>					
+				</div>
+			</article>
+
+			<article>
+				<h1>Tooltips</h1>
+				<div class="row">
+					<div class="col-xs-24 col-sm-12">
+						{{> atom-bs-tooltips status='success' place='left' title='Para a esquerda' value='Tooltip Left'}}
+
+						{{> atom-bs-tooltips status='info' place='top' title='Para o topo' value='Tooltip Top'}}
+
+						{{> atom-bs-tooltips status='warning' place='bottom' title='Para baixo' value='Tooltip Bottom'}}
+
+						{{> atom-bs-tooltips status='danger' place='right' title='Para a direita' value='Tooltip Right'}}
+					</div>
+
+					<div class="col-xs-24 col-sm-12">
+						{{> atom-bs-tooltips-clickable status='success' place='left' content='Para a esquerda' value='Tooltip Left'}}
+
+						{{> atom-bs-tooltips-clickable status='info' place='top' content='Para o topo' value='Tooltip Top'}}
+
+						{{> atom-bs-tooltips-clickable status='warning' place='bottom' content='Para baixo' value='Tooltip Bottom'}}
+
+						{{> atom-bs-tooltips-clickable status='danger' place='right' content='Para a direita' value='Tooltip Right'}}
+					</div>
+
+				</div>
+			</article>
+		</section>
+	</main>
+	{{> footer}}
+
+	{{> footer-scripts }}
+	<!--build:js js/main.js -->
+
+	<!-- endbuild -->
+</body>
+</html>
