@@ -167,9 +167,136 @@
 						{{>mol-bs-well size='lg' title='Título' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'}}
 					</div>
 				</div>
-
 			</article>
 
+			<article>
+				<h1>Input groups</h1>
+				<div class="row">
+					<div class="col-xs-24 col-sm-12">						
+						<div class="form-group">
+							{{>mol-bs-input-group-addon id='TelefoneComercial' type='text' addon='Telefone' size='lg' }}
+						</div>
+
+						<div class="form-group">
+							{{>mol-bs-input-group-addon id='TelefoneCelular' type='text' addon='Celular' }}
+						</div>
+
+						<div class="form-group">
+							{{>mol-bs-input-group-addon id='TelefoneResidencial' type='text' addon='Telefone Residencial' size='sm' }}
+						</div>
+
+						<div class="form-group">
+							{{>mol-bs-input-group-addon-right id='email' type='email' addon='@gmail.com' }}
+						</div>
+
+						<div class="form-group">
+							{{>mol-bs-input-group-double-addon id='number' type='number' addon='$' addon2='.00'}}
+						</div>
+						
+					</div>
+					<div class="col-xs-24 col-sm-12">
+						<div class="form-group">
+							{{>mol-bs-input-group-addon-select id='text' type='number' addon='$' type-addon='radio'}}
+						</div>
+
+						<div class="form-group">
+							{{>mol-bs-input-group-addon-select id='text' type='number' addon='$' type-addon='checkbox'}}
+						</div>
+
+						<div class="form-group">
+							{{>mol-bs-input-group-addon-dropdown status='info' button='Ação' type='text'}}
+						</div>
+
+						<div class="form-group">
+							{{>mol-bs-input-group-addon-dropdown-right status='success' button='Ação' type='text'}}
+						</div>						
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<h1>Navs</h1>
+
+				<div class="row">
+					<div class="col-xs-24 col-sm-12 panel">						
+						{{>mol-bs-nav nav='tabs' href='#' item='First tab' status='active'}}					
+					</div>	
+				
+					<div class="col-xs-24 col-sm-12 panel">
+						{{>mol-bs-nav nav='pills' href='#' item='First tab' status='active'}}
+					</div>						
+				</div>	
+
+				<div class="row">
+					<div class="col-xs-24 col-sm-12 panel">
+						{{>mol-bs-nav nav='pills nav-stacked' href='#' item='First tab' status='active'}}
+					</div>
+
+					<div class="col-xs-24 col-sm-12 panel">
+						{{>mol-bs-nav nav='tabs nav-justified' href='#' item='First tab' status='active'}}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-24 panel">
+						{{>mol-bs-nav nav='pills nav-justified' href='#' item='First tab' status='active'}}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-24 panel">
+						{{>mol-bs-navbar}}
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<h1>Page header</h1>
+
+				<div class="row">
+					<div class="col-xs-24">
+						{{>mol-bs-page-header}}
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<h1>Thumbnails</h1>
+				<div class="row">
+					<div class="col-xs-8">
+						{{>mol-bs-thumbnail src='images/mountains.png' alt='...' title='Title label' content='Lorem ipsum dolor sit amet'}}
+					</div>
+
+					<div class="col-xs-8">
+						{{>mol-bs-thumbnail src='images/lake-transparent.png' alt='...' title='Title label' content='Lorem ipsum dolor sit amet'}}
+					</div>
+
+					<div class="col-xs-8">
+						{{>mol-bs-thumbnail src='images/mountains-4.png' alt='...' title='Title label' content='Lorem ipsum dolor sit amet'}}
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<h1>Media object</h1>
+				<div class="row">
+					<div class="col-xs-24 col-sm-12">
+						{{> mol-bs-media-object src='images/thumb-mountain.jpg' alt='...' title='Headling' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit'}}
+
+						{{> mol-bs-media-object src='images/thumb-mountain.jpg' alt='...' title='Headling' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit'}}
+
+						{{> mol-bs-media-object src='images/thumb-mountain.jpg' alt='...' title='Headling' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit'}}
+					</div>
+
+					<div class="col-xs-24 col-sm-12">
+						{{> mol-bs-media-object src='images/thumb-mountain.jpg' alt='...' title='Headling' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit'}}
+
+						{{> mol-bs-media-object src='images/thumb-mountain.jpg' alt='...' title='Headling' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit'}}
+
+						{{> mol-bs-media-object src='images/thumb-mountain.jpg' alt='...' title='Headling' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit'}}
+					</div>
+				</div>
+			</article>
 			
 		</section>
 	</main>
