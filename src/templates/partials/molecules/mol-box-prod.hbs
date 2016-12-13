@@ -1,0 +1,27 @@
+<div class="box-product">	
+
+	<div class="box-product-title">
+		<h2>{{title}}</h2>
+	</div>
+
+	<p class="box-product-description">
+		{{description}}
+	</p>
+
+	<figure class="box-product-figure">
+		<img src="images/product-icon.png" alt="..." class="img-responsive">
+	</figure>
+
+	<div class="box-product-prices">
+		<span class="old-price">R$ 1200,00</span>
+		<span class="new-price">$1102,38</span>
+		<span class="parcel-price">9x de R$ 122,48 sem juros</span>
+	</div>
+
+	<div class="box-product-form">
+		<form class="form-flex">
+			{{> atom-bs-btn-button btn='success' type='button' value='Comprar'}}			
+			{{> atom-bs-btn-button btn='info' type='button' value='Carrinho'}}
+		</form>
+	</div>
+</div>

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<head>
-	<title>Front-End Dev Conference</title>
+<head>	
+	{{> head-metatags title='Front-End Dev Conference'}}
 	{{> head-scripts }}
 </head>
 <body>
 	{{> mol-bs-jumbotron title='Documentação do novo Ecom' description='Esta documentação já está utilizando Gulp e Handlebars' }}
 	<main class="main container">
 		<section>
-			<article>
+			<article>				
 				<h1>Alerts e Progress Bars</h1>
 				<div class="row">
 					<div class="col-xs-24 col-sm-12">
@@ -296,6 +296,10 @@
 						{{> mol-bs-media-object src='images/thumb-mountain.jpg' alt='...' title='Headling' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit'}}
 					</div>
 				</div>
+			</article>
+
+			<article>
+				{{> org-produtos section='Circuit Breakers and Switches'}}				
 			</article>
 			
 		</section>
