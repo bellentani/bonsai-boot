@@ -5,11 +5,12 @@
 }
 
 .box-product-description{
-	flex: 1;
+	min-height: 75px;
 }
 
 .box-product-title{
 	color: $life-green;
+	min-height: 48px;
 	
 	h2{
 		margin-top: 0;		
