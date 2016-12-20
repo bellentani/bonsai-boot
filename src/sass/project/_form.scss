@@ -8,3 +8,19 @@
 		border: inherit;
 	}
 }
+
+.btn-cart{
+	background-color: lighten($logo-green, 9.5%);
+	color: $white;
+	border: none;
+    padding-top: 16px;
+    padding-bottom: 17px;
+    margin-top: -9px;
+    margin-bottom: -9px;
+    margin-right: -32px;
+
+    &:hover, &:focus{
+		background-color: lighten($logo-green, 5.5%);;
+		color: $white;
+	}
+}
