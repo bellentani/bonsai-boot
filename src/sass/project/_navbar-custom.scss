@@ -1,33 +1,16 @@
-.navbar-custom{
-	@include border-radius(0px);
-	background-color: $life-green;
-	text-transform: uppercase;
-	min-height: 55px;
+.main-menu{
+	.nav{
+		min-height: 48px;
 
-	.navbar-nav{
-
-		>li{
-			>a{
+		li{
+			a{
+				padding: 15px;
 				color: $white;
-				padding-top: 17px;
-				padding-bottom: 17px;
-			}
-		}
 
-		>.active{
-			>a, 
-			>a:hover,
-			>a:focus{
-				background-color: $logo-green;
-				color: $white;
+				&:hover, &:focus{
+					color: $dark-gray;
+				}
 			}
-		}
-	}
-
-	.navbar-brand{
-		color: $white;
-		&:hover, &:focus{
-			color: $white;
 		}
 	}
 }
