@@ -50,66 +50,41 @@ $(function () {
           }
         }
       } else {
-        var jsonRespon = {
-          "responsive": []
-        };
-        var soEu = [];
+        var itemsJson = [];
+        var stringConfig = '';
+
         //jsonObj = JSON.parse(jsonRespon);
-        splitResp = owlResponsive.split(',');
-        for (var i = 0; i < splitResp.length; i++) {
-          splitArray = splitResp[i].split(':');
-          //addMenuItem(splitArray[0], jsonRespon.responsive, splitArray[1]);
-          //jsonObj.responsive[i].splitArray[0] = splitArray[1];
-          soEu.push(splitArray[0]);
-          //spliting = soEu[0];
-          splited = {items: splitArray[1]};
-          spliting = jsonRespon.responsive.children[1].push(splited);
-          //console.log('spl', splited);
+        splitViews = owlResponsive.split(',');
+        for (var i = 0; i < splitViews.length; i++) {
+          splitArray = splitViews[i].split(':');
+          itemsPage = splitArray[1];
+          viewportPage = splitArray[0];
 
-          //soEu = splited;
-
-
-          //addItem(splitArray[1], soEu, i);
-
-          var pushA = splitArray[0];
-          var pushB = splitArray[1];
-
-          //jsonRespon.push({pushA: { items: pushB} });
-
-          console.log(splitResp[i], splitArray);
+          if (i+1 < splitViews.length) {
+            stringConfig += viewportPage+':{"items": "'+itemsPage+'"},';
+          } else {
+            stringConfig += viewportPage+':{"items": "'+itemsPage+'"}';
+          }
         }
-        function addItem(title, arr, i) {
-          arr.push({
-              items: title
-          });
-        }
-        jsonRespon = JSON.stringify(soEu);
-        console.log(jsonRespon, soEu);
-
-        console.log(splitResp);
-        owlResponsive = soEu;
-
-        // owlResponsive = {
-        //   0:{
-        //     items: owlItems
-        //   },
-        //   600:{
-        //     items: owlItems
-        //   },
-        //   1000:{
-        //     items: owlItems
-        //   }
-        // }
+        stringConfig = '{'+stringConfig+'}';
+        var jsonConfig = JSON.stringify(eval("(" + stringConfig + ")"));
+        var responsiveConfig = JSON.parse(jsonConfig);
       }
 
+      var itemsInter = $(this).children('.item').length;
+      if (itemsInter > owlItems) {
+        $(this).addClass('owl-carousel').owlCarousel({
+          loop: true,
+          margin: 10,
+          nav: true,
+          responsive: responsiveConfig,
+          autoWidth: owlWid
+        })
+      } else {
+        divideWid = 100/owlItems;
+        $(this).children('.item').width(divideWid+'%').css('float', 'left');
+      }
 
-      $(this).addClass('owl-carousel').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        responsive: owlResponsive,
-        autoWidth: owlWid
-      })
     });
 
   });
