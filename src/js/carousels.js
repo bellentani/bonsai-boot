@@ -1,35 +1,32 @@
 $(function () {
-  $('.carousel-fullbanner').exists(function() {
-    this.addClass('owl-carousel').owlCarousel({
-      loop: true,
-      margin: 0,
-      nav: true,
-      responsive:{
-        0:{
-          items:1
-        },
-        600:{
-          items:1
-        },
-        1000:{
-          items: 1
-        }
-      }
-    });
-  });
-
   $('.carousel-multiple-items').exists(function() {
-    var owlItems;
-    var owlWid;
-    var loop;
-    var nav;
-    var margin;
-    var responsive;
+    var owlItems; //number 0,1,2...
+    var owlWid; //feito
+    var owlMargin; //feito
+    var owlLoop; //feito
+    var owlNav; //feito
+    var owlResponsive; //feito
+    var owlNavText; //feito
+    var owlDots; //feito
+    var owlCenter;
+    var mouseDrag;
+    var touchDrag;
+    var pullDrag;
+    var lazyLoad;
+    var autoplay;
+    var autoplayTimeout;
+    var animateOut;
+    var animateInClass;
 
     this.each(function(index, el) {
       owlItems = $(this).data('items');
       owlWid = $(this).data('width');
+      owlMargin = $(this).data('margin');
+      owlLoop = $(this).data('loop');
       owlResponsive = $(this).data('responsive');
+      owlNav = $(this).data('nav');
+      owlNavText = $(this).data('nav-text');
+      owlDots = $(this).data('dots');
 
       if (!owlItems) {
         owlItems = 1;
@@ -37,8 +34,18 @@ $(function () {
       if (!owlWid) {
         owlWid = false;
       }
+      if (owlLoop === true) {
+        owlLoop = true;
+      } else {
+        owlLoop = false;
+      }
+      if (owlMargin === null || owlMargin === '' || owlMargin === undefined) {
+        owlMargin = 10;
+      } else if (owlMargin === '0') {
+        owlMargin = 0;
+      }
       if (!owlResponsive) {
-        owlResponsive = {
+        responsiveConfig = {
           0:{
             items: owlItems
           },
@@ -52,7 +59,6 @@ $(function () {
       } else {
         var itemsJson = [];
         var stringConfig = '';
-
         //jsonObj = JSON.parse(jsonRespon);
         splitViews = owlResponsive.split(',');
         for (var i = 0; i < splitViews.length; i++) {
@@ -70,23 +76,46 @@ $(function () {
         var jsonConfig = JSON.stringify(eval("(" + stringConfig + ")"));
         var responsiveConfig = JSON.parse(jsonConfig);
       }
-
+      if (owlNav === undefined) {
+        owlNav = true;
+      }
+      if (owlDots === undefined) {
+        owlDots = true;
+      }
+      if (!owlNavText) {
+        owlNavText = [
+          'Anterior',
+          'Próximo  '
+        ];
+      } else if (owlNavText == 'chevron') {
+        owlNavText = [
+          '<div class="icon icon-chevron-left"></div>',
+          '<div class="icon icon-chevron-right"></div>'
+        ];
+      } else {
+        var splitNavs = owlNavText.split(',');
+        var obj = [];
+        for (var i = 0; i < splitNavs.length; i++) {
+          obj.push(splitNavs[i]);
+        }
+        owlNavText = obj;
+      }
+      //Monta o carrossel
       var itemsInter = $(this).children('.item').length;
       if (itemsInter > owlItems) {
         $(this).addClass('owl-carousel').owlCarousel({
-          loop: true,
-          margin: 10,
-          nav: true,
+          loop: owlLoop,
+          margin: owlMargin,
+          nav: owlNav,
+          dots: owlDots,
           responsive: responsiveConfig,
-          autoWidth: owlWid
+          autoWidth: owlWid,
+          navText: owlNavText
         })
       } else {
         divideWid = 100/owlItems;
-        $(this).children('.item').width(divideWid+'%').css('float', 'left');
+        $(this).addClass('owl-carosel-static').children('.item').width(divideWid+'%');
       }
-
     });
-
   });
-
 });
