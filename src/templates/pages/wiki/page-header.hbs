@@ -6,21 +6,14 @@
 <body>
 	{{> mol-bs-jumbotron title='Documentação do novo Ecom' description='Esta documentação já está utilizando Gulp e Handlebars' }}
 	<main class="main container">		
-		<section>		
-			<article>
-				{{> org-produtos section='Circuit Breakers and Switches'}}				
+		<section>
+			<article>				
+				<div class="row">
+					<div class="col-xs-24">
+						{{>mol-bs-page-header}}
+					</div>
+				</div>
 			</article>
-
-			<article>
-				<h1 class="font-titles">Navbar Customizado</h1>
-				{{> mol-navbar}}
-			</article>
-
-			<article>
-				<h1 class="font-titles">Menu principal</h1>
-				{{> mol-main-menu}}
-			</article>	
-
 		</section>
 	</main>
 	{{> footer}}
