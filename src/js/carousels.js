@@ -1,13 +1,14 @@
 $(function () {
   $('.carousel-multiple-items').exists(function() {
-    var owlItems; //number 0,1,2...
-    var owlWid; //feito
-    var owlMargin; //feito
-    var owlLoop; //feito
-    var owlNav; //feito
-    var owlResponsive; //feito
-    var owlNavText; //feito
-    var owlDots; //feito
+    var owlTheme; //adiciona o thema
+    var owlItems; //number 0,1,2... //adiciona a quantidade de itens
+    var owlWid; //feito // true ou false, determina se é automatico ou não o tamanho da div relacionada ao conteudo
+    var owlMargin; //feito //number, define o tamanho da margin entre os itens
+    var owlLoop; //feito //true ou false, se tem loop ou não
+    var owlNav; //feito //true ou false, se tem navegação por elementos
+    var owlResponsive; //feito //string que é transformada em objeto json, usa o modelo "{resolucao maxima}:{items},"
+    var owlNavText; //feito //string que é transformada em objeto json, usa o modelo "{prev}, {next}"
+    var owlDots; //feito //true ou false, mostra a navegação com contadores em bolinhas (dots)
     var owlCenter;
     var mouseDrag;
     var touchDrag;
@@ -19,6 +20,7 @@ $(function () {
     var animateInClass;
 
     this.each(function(index, el) {
+      owlTheme = $(this).data('theme');
       owlItems = $(this).data('items');
       owlWid = $(this).data('width');
       owlMargin = $(this).data('margin');
@@ -28,6 +30,9 @@ $(function () {
       owlNavText = $(this).data('nav-text');
       owlDots = $(this).data('dots');
 
+      if (!owlTheme) {
+        owlTheme = 'owl-theme';
+      }
       if (!owlItems) {
         owlItems = 1;
       }
@@ -103,7 +108,7 @@ $(function () {
       //Monta o carrossel
       var itemsInter = $(this).children('.item').length;
       if (itemsInter > owlItems) {
-        $(this).addClass('owl-carousel').owlCarousel({
+        $(this).addClass('owl-carousel ' +owlTheme).owlCarousel({
           loop: owlLoop,
           margin: owlMargin,
           nav: owlNav,

@@ -745,5 +745,61 @@
       "sku" : "587-76-2599",
       "category" : "Front-line"
     }
+  ],
+  "carousel":
+  [
+    {
+      "square": [
+        {
+          "img": "https://dummyimage.com/400x400/696969/fff.png&text=Banner+(400+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/400x400/696969/fff.png&text=Banner+(400+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/400x400/696969/fff.png&text=Banner+(400+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/400x400/696969/fff.png&text=Banner+(400+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/400x400/696969/fff.png&text=Banner+(400+x+400)"
+        }
+      ],
+      "retangle-vertical": [
+        {
+          "img": "https://dummyimage.com/200x400/696969/fff.png&text=Banner+(200+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/200x400/696969/fff.png&text=Banner+(200+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/200x400/696969/fff.png&text=Banner+(200+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/200x400/696969/fff.png&text=Banner+(200+x+400)"
+        },
+        {
+          "img": "https://dummyimage.com/200x400/696969/fff.png&text=Banner+(200+x+400)"
+        }
+      ],
+      "retangle-horizontal": [
+        {
+          "img": "https://dummyimage.com/400x200/696969/fff.png&text=Banner+(400+x+200)"
+        },
+        {
+          "img": "https://dummyimage.com/400x200/696969/fff.png&text=Banner+(400+x+200)"
+        },
+        {
+          "img": "https://dummyimage.com/400x200/696969/fff.png&text=Banner+(400+x+200)"
+        },
+        {
+          "img": "https://dummyimage.com/400x200/696969/fff.png&text=Banner+(400+x+200)"
+        },
+        {
+          "img": "https://dummyimage.com/400x200/696969/fff.png&text=Banner+(400+x+200)"
+        }
+      ]
+    }
   ]
 }
