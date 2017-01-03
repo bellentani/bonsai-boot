@@ -10,3 +10,45 @@
     float: left;
   }
 }
+.owl-carousel.owl-arrows {
+  position: relative;
+
+  .owl-nav {
+    .owl-prev,
+    .owl-next {
+      position: absolute;
+      top: 40%;
+      background-color: transparent;
+      color: $arrows-icons;
+      font-size: 2em;
+      @include opacity(0.8);
+      @include transition (all 350ms ease-in-out);
+
+      &.disabled {
+        &,
+        &:hover,
+        &:focus {
+          @include opacity(0.1);
+          cursor: default;
+          color: $white;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        color: lighten($arrows-icons, 20%);
+        @include opacity(0.5);
+        @include transition (all 350ms ease-in-out);
+      }
+    }
+    .owl-prev {
+      left: 0;
+      padding-left: 0.5em;
+    }
+    .owl-next {
+      right: 0;
+      left: auto;
+      padding-right: 0.5em;
+    }
+  }
+}

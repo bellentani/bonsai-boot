@@ -1,0 +1,12 @@
+.gallery {
+  &--controls {
+    .item {
+      border: 2px solid transparent;
+      cursor: pointer;
+
+      &.active {
+        border-color: $life-green;
+      }
+    }
+  }
+}

@@ -107,6 +107,33 @@ $(function () {
       }
       //Monta o carrossel
       var itemsInter = $(this).children('.item').length;
+      //console.log(itemsInter, owlItems, responsiveConfig[0].items);
+      //var found = getValues(responsiveConfig, 'items');
+      //console.log(found);
+
+      var widOwl = $(window).width();
+      //console.log(widOwl);
+      //navega pelo objeto do responsivo
+      var count = Object.keys(responsiveConfig).length;
+      //console.log(count);
+
+      $.each(responsiveConfig, function(i, v) {
+        var lastItem = Object.keys(responsiveConfig).pop();
+        var valueToShow;
+        if (lastItem < widOwl) {
+          valueToShow = lastItem;
+        }
+        //console.log(v.items, i, lastItem, getItem(responsiveConfig[i], i, 1));
+        console.log('lastItem', lastItem);
+        console.log('achou maior', i, responsiveConfig[i].items, widOwl, lastItem);
+        if (lastItem < widOwl && i > lastItem) {
+
+          return false; // stops the loop
+        } else if (lastItem < i) {
+
+          return false; // stops the loop
+        }
+      });
       if (itemsInter > owlItems) {
         $(this).addClass('owl-carousel ' +owlTheme).owlCarousel({
           loop: owlLoop,
@@ -124,3 +151,11 @@ $(function () {
     });
   });
 });
+
+//return an array of keys that match on a certain value
+var getItem = function(items, key, i) {
+  var keys = Object.keys(items).sort(function(a,b){return a-b;});
+  var index = keys.indexOf(key);
+  if ((i==-1 && index>0) || (i==1 && index<keys.length-1)) {index = index+i;}
+  return items[keys[index]];
+}
