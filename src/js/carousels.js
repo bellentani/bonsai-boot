@@ -116,6 +116,7 @@ $(function () {
       //navega pelo objeto do responsivo
       var count = Object.keys(responsiveConfig).length;
       //console.log(count);
+      var numberElements;
 
       $.each(responsiveConfig, function(i, v) {
         var lastItem = Object.keys(responsiveConfig).pop();
@@ -124,17 +125,36 @@ $(function () {
           valueToShow = lastItem;
         }
         //console.log(v.items, i, lastItem, getItem(responsiveConfig[i], i, 1));
-        console.log('lastItem', lastItem);
-        console.log('achou maior', i, responsiveConfig[i].items, widOwl, lastItem);
-        if (lastItem < widOwl && i > lastItem) {
-
+        //console.log('lastItem', lastItem);
+        //console.log('achou maior', i, responsiveConfig[i].items, widOwl, lastItem);
+        if (lastItem < widOwl) {
+          //console.log('pega o tamanho do ultimo responsivo: ', lastItem, ' i:', i, responsiveConfig[i].items);          
+          numberElements = responsiveConfig[i].items;
           return false; // stops the loop
-        } else if (lastItem < i) {
+        } else {
+          //console.log('pega o tamanho da tela: ', widOwl, ' i:', i)
 
-          return false; // stops the loop
+          if (i < widOwl) {
+            numberElements = i;
+            //console.log('dentro', i)
+          } else {
+            var arr = Object.keys(responsiveConfig);
+            b = closest(widOwl, arr);
+            numberElements = responsiveConfig[b].items;
+            //console.log('maior', i, 'b: '+b, numberElements);
+
+            // for (var b in responsiveConfig) {
+            //   console.log(b + ' = ' +  responsiveConfig[b].items);
+            // }
+            //a = responsiveConfig[i];
+          }
+          //return false; // stops the loop
         }
       });
-      if (itemsInter > owlItems) {
+      countItems = numberElements;
+      //console.log(itemsInter, countItems);
+      //console.log(numberElements, b, widOwl, responsiveConfig);
+      if (itemsInter > countItems) {
         $(this).addClass('owl-carousel ' +owlTheme).owlCarousel({
           loop: owlLoop,
           margin: owlMargin,
@@ -145,17 +165,36 @@ $(function () {
           navText: owlNavText
         })
       } else {
-        divideWid = 100/owlItems;
-        $(this).addClass('owl-carosel-static').children('.item').width(divideWid+'%');
+        divideWid = round((100/countItems), 0);
+        $(this).addClass('owl-carosel-static').children('.item').css('width', divideWid+'%');
+        $(this).addClass('owl-carosel-static').children('.item:first').addClass('active');
       }
     });
   });
 });
 
 //return an array of keys that match on a certain value
-var getItem = function(items, key, i) {
+function getItem(items, key, i) {
   var keys = Object.keys(items).sort(function(a,b){return a-b;});
   var index = keys.indexOf(key);
   if ((i==-1 && index>0) || (i==1 && index<keys.length-1)) {index = index+i;}
   return items[keys[index]];
+}
+
+function closest (num, arr) {
+  var curr = arr[0];
+  var diff = Math.abs (num - curr);
+  for (var val = 0; val < arr.length; val++) {
+      var newdiff = Math.abs (num - arr[val]);
+      if (newdiff < diff) {
+          diff = newdiff;
+          curr = arr[val];
+      }
+  }
+  return curr;
+}
+
+function round(d, decimals) {
+   var x = Math.pow(10, decimals)
+   return Math.floor(d * x)/x
 }

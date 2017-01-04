@@ -7,7 +7,31 @@
   margin-bottom: 1em;
 
   .item {
+    box-sizing: border-box;
+    border: 0;
+    position: relative;
+    min-height: 1px;
     float: left;
+    margin: 0;
+    padding: 5px;
+    cursor: pointer;
+    border: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+      border: 2px solid transparent;
+    }
+    &:last-child {
+      //padding: 10px;
+    }
+    &.active {
+      border: 0;
+
+      img {
+        border-color: $life-green;
+      }
+    }
   }
 }
 .owl-carousel.owl-arrows {
