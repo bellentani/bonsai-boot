@@ -1,7 +1,7 @@
 $(function () {
   $('.gallery').exists(function() {
-    var owlGallery = $('.gallery').children('.carousel-multiple-items');
-    var owlIndicators = $('.gallery').find('.gallery--controls').children('.carousel-multiple-items');
+    var owlGallery = $(this).children('.carousel-multiple-items');
+    var owlIndicators = $(this).find('.gallery--controls').children('.carousel-multiple-items');
 
     //console.log(owlGallery, owlIndicators);
     owlGallery.bind({
@@ -53,6 +53,25 @@ $(function () {
 
         owlTarget.trigger('to.owl.carousel', [owlGoTo]);
         //return false;
+
+        if (!isMobile.phone && $(this).closest('.gallery').hasClass('zoom')) {
+          var zoomConfig = {};
+          var zoomActive = false;
+          var itemCarousel = $(this).closest('.gallery').find('.owl-stage-outer .owl-item');
+          console.log(itemCarousel);
+
+          if(zoomActive) {
+            itemCarousel.elevateZoom(zoomConfig);//initialise zoom
+          } else {
+            $.removeData(itemCarousel, 'elevateZoom');//remove zoom instance from image
+            $('.zoomContainer').remove();// remove zoom container from DOM
+          }
+
+          itemCarousel.find('.item').removeClass('zoom-item').promise().done(function () {
+            itemCarousel.eq(owlGoTo).find('.item').addClass('zoom-item');
+            zoomImage('.zoom-item');
+          });
+        }
     });
 
     //Carousel Galleria com video
@@ -64,7 +83,17 @@ $(function () {
             $(this).attr('src', video);
         });
     });
+
+    if (!isMobile.phone) {
+      owlGallery.find('.item:first').addClass('zoom-item');
+    }
+    if (owlGallery.closest('.gallery').hasClass('zoom')) {
+      zoomImage('.zoom-item');
+      console.log('foi');
+    }
   });
+
+
 });
 
 function changeItems(e, eleTar) {

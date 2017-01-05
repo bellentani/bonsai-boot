@@ -14,13 +14,16 @@
             <h2>Fullbanner</h2>
           </div>
           <div class="col-xs-24 col-sm-12">
-            {{> org-gallery thumbs="thumbs"}}
+            {{> org-gallery thumbs="true"}}
           </div>
           <div class="col-xs-24 col-sm-12">
-            {{> org-gallery nav="nav" thumbs="thumbs"}}
+            {{> org-gallery nav="true" thumbs="true"}}
           </div>
         </div>
         <div class="row">
+          <div class="col-xs-24 col-sm-12">
+            {{> org-gallery nav="true" thumbs="true" zoom="true"}}
+          </div>
           <div class="col-xs-24 col-sm-12">
             {{> org-gallery }}
           </div>
@@ -30,6 +33,8 @@
     {{> footer-scripts }}
     <!--build:js js/carousels.js -->
     <script src='js/plugins/owl.carousel.js'></script>
+    <script src='js/plugins/jquery.elevatezoom.js'></script>
+    <script src='js/zoom.js'></script>
     <script src='js/carousels.js'></script>
     <script src='js/gallery.js'></script>
     <script src='js/main.js'></script>

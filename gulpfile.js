@@ -223,7 +223,8 @@ gulp.task('jsBower', function() {
     config.bowerDir+'/underscore/underscore.js',
     config.bowerDir+'/underscore/underscore.min.js',
     config.bowerDir+'/backbone/backbone.js',
-    config.bowerDir+'/backbone/backbone.min.js'
+    config.bowerDir+'/backbone/backbone.min.js',
+    config.bowerDir+'/elevatezoom/jquery.elevatezoom.js'
   ])
   .pipe(gulp.dest(config.srcPath+'js/vendor/'));
 

@@ -35,5 +35,8 @@
     "backbone": "^1.3.3",
     "bootstrap-sass": "^3.3.7",
     "bootstrap-select": "^1.12.1"
+  },
+  "dependencies": {
+    "elevatezoom": "^2.2.3"
   }
 }

@@ -128,7 +128,7 @@ $(function () {
         //console.log('lastItem', lastItem);
         //console.log('achou maior', i, responsiveConfig[i].items, widOwl, lastItem);
         if (lastItem < widOwl) {
-          //console.log('pega o tamanho do ultimo responsivo: ', lastItem, ' i:', i, responsiveConfig[i].items);          
+          //console.log('pega o tamanho do ultimo responsivo: ', lastItem, ' i:', i, responsiveConfig[i].items);
           numberElements = responsiveConfig[i].items;
           return false; // stops the loop
         } else {
@@ -163,11 +163,15 @@ $(function () {
           responsive: responsiveConfig,
           autoWidth: owlWid,
           navText: owlNavText
-        })
+        });
       } else {
         divideWid = round((100/countItems), 0);
         $(this).addClass('owl-carosel-static').children('.item').css('width', divideWid+'%');
         $(this).addClass('owl-carosel-static').children('.item:first').addClass('active');
+
+        if (countItems == 1) {
+          $(this).children('.item').addClass('zoom-product');
+        }
       }
     });
   });
