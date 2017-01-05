@@ -1,19 +1,36 @@
 $(function () {
-
   $('.gallery').exists(function() {
     var owlGallery = $('.gallery').children('.carousel-multiple-items');
     var owlIndicators = $('.gallery').find('.gallery--controls').children('.carousel-multiple-items');
 
     //console.log(owlGallery, owlIndicators);
-
     owlGallery.bind({
       'dragged.owl.carousel': function(e) {
         var eleTar = e.target;
         changeItems(e, eleTar);
+        changeItemsThumb(e, eleTar);
       },
       'changed.owl.carousel': function(e) {
         var eleTar = e.target;
+
+        //console.log(item, owlTarget);
         changeItems(e, eleTar);
+        changeItemsThumb(e, eleTar);
+      }
+    });
+
+    owlIndicators.bind({
+      'dragged.owl.carousel': function(e) {
+        var eleTar = e.target;
+        var item = e.item.index;
+        //console.log(item);
+        //changeItems(e, eleTar);
+      },
+      'changed.owl.carousel': function(e) {
+        var eleTar = e.target;
+        var item = e.item.index;
+        //console.log(item);
+        //changeItems(e, eleTar);
       }
     });
 
@@ -38,7 +55,6 @@ $(function () {
         //return false;
     });
 
-
     //Carousel Galleria com video
     owlGallery.on('changed.owl.carousel', function (e) {
         var pathVideo = $('.gallery').find('.owl-carousel:first .video-gallery');
@@ -49,7 +65,6 @@ $(function () {
         });
     });
   });
-
 });
 
 function changeItems(e, eleTar) {
@@ -68,4 +83,10 @@ function changeItems(e, eleTar) {
   });
   $(eleTar).trigger('to.owl.carousel', [owlItem]);
   //console.log(eleTar);
+}
+
+function changeItemsThumb(e, eleTar) {
+  var item = e.item.index;
+  var owlTarget = $(eleTar).closest('.gallery').find('.gallery--controls').children('.carousel-multiple-items');
+  owlTarget.trigger('to.owl.carousel', [item]);
 }
