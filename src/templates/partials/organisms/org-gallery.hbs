@@ -1,5 +1,24 @@
-<div class="gallery
-  {{#if zoom}} zoom{{/if}}"
+<div class="gallery {{#if zoom}} zoom{{/if}}"
+  {{#if zoom-cursor}}data-zoom-cursor="{{zoom-cursor}}"{{/if}}
+  {{#if zoom-position}}data-zoom-position="{{zoom-position}}"{{/if}}
+  {{#if zoom-fadein}}data-zoom-fadein="{{zoom-fadein}}"{{/if}}
+  {{#if zoom-fadeout}}data-zoom-fadeout="{{zoom-fadeout}}"{{/if}}
+  {{#if zoom-window-offset}}data-zoom-window-offset="{{zoom-window-offset}}"{{/if}}
+  {{#if zoom-scroll-zoom}}data-zoom-scroll="{{zoom-scroll-zoom}}"{{/if}}
+  {{#if zoom-easing}}data-zoom-easing="{{zoom-easing}}"{{/if}}
+  {{#if zoom-lens-color}}data-zoom-lens-color="{{zoom-lens-color}}"{{/if}}
+  {{#if zoom-lens-opacity}}data-zoom-lens-opacity="{{zoom-lens-opacity}}"{{/if}}
+  {{#if zoom-border-size}}data-zoom-border-size="{{zoom-border-size}}"{{/if}}
+  {{#if zoom-border-color}}data-zoom-border-color="{{zoom-border-color}}"{{/if}}
+  {{#if zoom-lens-border-size}}data-zoom-lens-border-size="{{zoom-lens-border-size}}"{{/if}}
+  {{#if zoom-tint}}
+    data-zoom-tint="{{zoom-tint}}"
+    {{#if zoom-tint-color}}data-zoom-tint-color="{{zoom-tint-color}}"{{/if}}
+    {{#if zoom-tint-fadein}}data-zoom-tint-fadein="{{zoom-tint-fadein}}"{{/if}}
+    {{#if zoom-tint-fadeout}}data-zoom-tint-fadeout="{{zoom-tint-fadeout}}"{{/if}}
+    {{#if zoom-tint-lenszoom}}data-zoom-tint-lenszoom="{{zoom-tint-lenszoom}}"{{/if}}
+    {{#if zoom-tint-containlenszoom}}data-zoom-tint-containlenszoom="{{zoom-tint-containlenszoom}}"{{/if}}
+  {{/if}}
 >
   <!-- Gallery -->
   {{#if zoom}}

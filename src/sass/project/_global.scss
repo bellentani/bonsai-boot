@@ -68,3 +68,10 @@ p {
 .zoomContainer {
     z-index: 10;
 }
+
+.zoom-image {
+  &--picture {
+    width: 100%;
+    height: auto;
+  }
+}

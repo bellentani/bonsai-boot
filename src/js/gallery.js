@@ -3,6 +3,8 @@ $(function () {
     var owlGallery = $(this).children('.carousel-multiple-items');
     var owlIndicators = $(this).find('.gallery--controls').children('.carousel-multiple-items');
 
+    var zoomOptions = {}
+
     //console.log(owlGallery, owlIndicators);
     owlGallery.bind({
       'dragged.owl.carousel': function(e) {
@@ -55,13 +57,17 @@ $(function () {
         //return false;
 
         if (!isMobile.phone && $(this).closest('.gallery').hasClass('zoom')) {
-          var zoomConfig = {};
+          var zoomOptions = {};
           var zoomActive = false;
           var itemCarousel = $(this).closest('.gallery').find('.owl-stage-outer .owl-item');
-          console.log(itemCarousel);
+          //console.log(itemCarousel);
+
 
           if(zoomActive) {
-            itemCarousel.elevateZoom(zoomConfig);//initialise zoom
+            //itemCarousel.elevateZoom(zoomOptions);//initialise zoom
+            element = $(this).closest('.gallery').find('.zoom-item');
+            //console.log('active')
+            zoomImage(element, tar);
           } else {
             $.removeData(itemCarousel, 'elevateZoom');//remove zoom instance from image
             $('.zoomContainer').remove();// remove zoom container from DOM
@@ -69,7 +75,9 @@ $(function () {
 
           itemCarousel.find('.item').removeClass('zoom-item').promise().done(function () {
             itemCarousel.eq(owlGoTo).find('.item').addClass('zoom-item');
-            zoomImage('.zoom-item');
+            tar = owlGallery.closest('.gallery.zoom');
+            element = $(this).closest('.gallery').find('.zoom-item');
+            zoomImage(element, tar);
           });
         }
     });
@@ -87,10 +95,11 @@ $(function () {
     if (!isMobile.phone) {
       owlGallery.find('.item:first').addClass('zoom-item');
     }
-    if (owlGallery.closest('.gallery').hasClass('zoom')) {
-      zoomImage('.zoom-item');
-      console.log('foi');
-    }
+    owlGallery.closest('.gallery.zoom').each(function(index, el) {
+      tar = owlGallery.closest('.gallery.zoom');
+      element = $(this).find('.zoom-item');
+      zoomImage(element, tar);
+    });
   });
 
 
