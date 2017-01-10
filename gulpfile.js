@@ -224,7 +224,8 @@ gulp.task('jsBower', function() {
     config.bowerDir+'/underscore/underscore.min.js',
     config.bowerDir+'/backbone/backbone.js',
     config.bowerDir+'/backbone/backbone.min.js',
-    config.bowerDir+'/elevatezoom/jquery.elevatezoom.js'
+    config.bowerDir+'/elevatezoom/jquery.elevatezoom.js',
+    config.bowerDir+'/prism/prism.js'
   ])
   .pipe(gulp.dest(config.srcPath+'js/vendor/'));
 
@@ -265,6 +266,13 @@ gulp.task('scssBower', function() {
   //.pipe(gulpif(condition, rename({prefix: '_', extname: '.scss'}) ))
   .pipe(rename({prefix: '_' }))
   .pipe(gulp.dest(config.srcPath+'sass/plugins/bootstrap-select/'));
+
+  //prism
+  gulp.src([
+    config.bowerDir+'/prism/themes/**/*.css'
+  ])
+  .pipe(gulpif(condition, rename({prefix: '_', extname: '.scss'}) ))
+  .pipe(gulp.dest(config.srcPath+'sass/plugins/prism/'));
 
   //Bootstrap
   //-> scss

@@ -37,6 +37,7 @@
     "bootstrap-select": "^1.12.1"
   },
   "dependencies": {
-    "elevatezoom": "^2.2.3"
+    "elevatezoom": "^2.2.3",
+    "prism": "^1.6.0"
   }
 }
