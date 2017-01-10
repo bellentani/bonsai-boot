@@ -9,6 +9,7 @@ browserSync = require('browser-sync').create(),
 del = require('del'),
 useref = require('gulp-useref'),
 uglify = require('gulp-uglify'),
+htmlbeautify = require('gulp-html-beautify'),
 gulpIf = require('gulp-if'),
 cssnano = require('gulp-cssnano'),
 imagemin = require('gulp-imagemin'),
@@ -117,6 +118,11 @@ gulp.task('hbs', function() {
   var partialsDir = config.srcPath+'templates/partials';
   //var dirName = path.dirname(partialsList);
   //console.log(dirName);
+  //options do beautify
+  var beautifyOptions = {
+    indentSize: 2
+    //jslint_happy: true
+  };
 
   var subdirsList = dir.subdirs(partialsDir, function(err, subdirs) {
     if (err) {
@@ -134,7 +140,11 @@ gulp.task('hbs', function() {
         //   footer : '<footer>the end</footer>'
         // },
         batch: batchList,
-        helpers : helper
+        helpers : { //helper
+          'raw-helper' : function(options) {
+            return options.fn();
+          }
+        }
       }
       console.log(batchList);
       return gulp.src([
@@ -142,6 +152,7 @@ gulp.task('hbs', function() {
           //'!'+config.srcPath+'templates/**/*.hbs',
         ])
         .pipe(handlebars(content, options))
+        .pipe(htmlbeautify(beautifyOptions))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest(config.distPath))
         .pipe(browserSync.reload({
@@ -151,21 +162,45 @@ gulp.task('hbs', function() {
   });
 });
 
+//html wiki prettify
+gulp.task('clean-templates', function() {
+  var options = {
+    indentSize: 2
+  };
+  gulp.src(config.distPath+'wiki/**/*.html')
+  .pipe(htmlbeautify(options))
+  .pipe(gulp.dest(config.distPath+'wiki/'))
+});
+
 gulp.task('clean:dist', function() {
   console.log('deleta');
   return del.sync(config.distPath);
-})
+});
+
+gulp.task('copy-templates', function() {
+  //bootstrap-select
+  gulp.src([
+    config.srcPath+'/templates/partials/**/*.hbs'
+  ])
+  //.pipe(gulpif(condition, rename({prefix: '_', extname: '.scss'}) ))
+  .pipe(rename({extname: '.txt' }))
+  .pipe(gulp.dest(config.distPath+'wiki/elements'));
+});
 
 //Funciona quando usando o Compass - depende do Rails + Sass + Compass instalados e configurados na máquina
-gulp.task('watch', ['browserSync'], function(callback){
+gulp.task('watch', ['browserSync', 'clean:dist'], function(callback){
+
   runSequence('hbs', //clean:dist e a task original aqui, removida porque deu problema no windows
-    ['compass', 'js', 'useref', 'images', 'fonts', 'root-files'],
+    ['hbs', 'compass', 'js', 'useref', 'images', 'fonts', 'root-files'],
+    'clean-templates',
     callback
   );
+
   gulp.watch([
     config.srcPath+'templates/**/*.hbs',
     config.srcPath+'templates/data/**/*.*'
   ], ['hbs']);
+
   gulp.watch(config.srcPath+'sass/**/*.+(scss|sass)', ['compass']);
   gulp.watch([
     config.srcPath+'fonts/**/*',
@@ -183,17 +218,18 @@ gulp.task('watch', ['browserSync'], function(callback){
     config.srcPath+'*.{ico,jpg,png,gif,txt,xml}',
     '!'+config.srcPath+'*.+(zip|rar|psd|ai|pdf)'
   ], ['root-files']);
+
   gulp.watch([
     config.srcPath+'fonts/**/*',
     config.distPath+'js/**/*.js',
     config.distPath+'*.[html|css]',
     '!'+config.srcPath+'fonts/**/*.+(html|css)'
   ], browserSync.reload);
-})
+});
 
 gulp.task('build', function (callback) {
   runSequence('clean:dist',
-    ['compass', 'js', 'hbs', 'images', 'fonts'],
+    ['compass', 'js', 'hbs', 'clean-templates', 'images', 'fonts'],
     callback
   )
 });
