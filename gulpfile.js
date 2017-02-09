@@ -74,7 +74,10 @@ gulp.task('copy:root', function() {
 gulp.task('images', function() {
   return gulp.src([
     config.srcPath+'**/*.{png,jpg,gif,svg}',
-    '!'+config.srcPath+'fonts/**/*.*'
+    '!'+config.srcPath+'fonts/**/*.*',
+    '!'+config.srcPath+'sass/**/*.*',
+    '!'+config.srcPath+'components/**/*.*',
+    '!'+config.angularPath+'fonts/**/*.*'
   ])
   .pipe(gulp.dest(config.distPath))
 });
@@ -96,6 +99,14 @@ gulp.task('root-files', function() {
   .pipe(gulp.dest(config.distPath))
 });
 
+gulp.task('sample-files', function() {
+  return gulp.src([
+    config.srcPath+'samples/**/*.*',
+    '!'+config.srcPath+'**/*.md'
+  ])
+  .pipe(gulp.dest(config.distPath))
+});
+
 gulp.task('js', function() {
   return gulp.src([
     config.srcPath+'**/*.js',
@@ -105,10 +116,11 @@ gulp.task('js', function() {
 });
 
 gulp.task('useref', function(){
-  return gulp.src(config.distPath+'**/*.html')
+  return gulp.src(config.distPath+'/carousels.html')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
+    .pipe(rename({prefix: '_'}))
     .pipe(gulp.dest(config.distPath))
 });
 
@@ -191,7 +203,7 @@ gulp.task('copy-templates', function() {
 gulp.task('watch', ['browserSync', 'clean:dist'], function(callback){
 
   runSequence('hbs', //clean:dist e a task original aqui, removida porque deu problema no windows
-    ['hbs', 'compass', 'js', 'useref', 'images', 'fonts', 'root-files'],
+    ['compass', 'js', 'images', 'fonts', 'root-files', 'sample-files'],
     'clean-templates',
     callback
   );
@@ -228,8 +240,16 @@ gulp.task('watch', ['browserSync', 'clean:dist'], function(callback){
 });
 
 gulp.task('build', function (callback) {
-  runSequence('clean:dist',
-    ['compass', 'js', 'hbs', 'clean-templates', 'images', 'fonts'],
+  runSequence(
+    'clean:dist',
+    'hbs',
+    'compass',
+    'clean-templates',
+    'js',
+    'images',
+    'fonts',
+    'sample-files',
+    'root-files',
     callback
   )
 });
