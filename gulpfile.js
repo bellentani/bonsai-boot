@@ -1,6 +1,8 @@
 var gulp = require('gulp'),
 sass = require('gulp-sass'),
 compass = require('gulp-compass'),
+bourbon = require('node-bourbon').includePaths,
+neat = require('node-neat').includePaths,
 sourcemaps = require('gulp-sourcemaps'),
 handlebars = require('gulp-compile-handlebars'),
 rename = require('gulp-rename'),
@@ -49,6 +51,22 @@ gulp.task('compass', function() {
       this.emit('end');
     })
     //.pipe(minifyCSS())
+    .pipe(gulp.dest(config.distPath+'css'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
+});
+
+//Sass com bourbon
+gulp.task('sass', function() {
+  gulp.src(config.srcPath+'sass/**/*.+(scss|sass)')
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+      includePaths: bourbon,
+      includePaths: neat,
+      outputStyle: 'compressed'
+    }))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.distPath+'css'))
     .pipe(browserSync.reload({
       stream: true
