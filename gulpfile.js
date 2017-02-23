@@ -17,7 +17,7 @@ cssnano = require('gulp-cssnano'),
 imagemin = require('gulp-imagemin'),
 runSequence = require('run-sequence'),
 bower = require('gulp-bower'),
-regexRename = require('gulp-regex-rename')
+regexRename = require('gulp-regex-rename'),
 babel = require('gulp-babel');
 
 var config = {
