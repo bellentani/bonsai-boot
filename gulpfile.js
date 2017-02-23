@@ -17,7 +17,8 @@ cssnano = require('gulp-cssnano'),
 imagemin = require('gulp-imagemin'),
 runSequence = require('run-sequence'),
 bower = require('gulp-bower'),
-regexRename = require('gulp-regex-rename');
+regexRename = require('gulp-regex-rename')
+babel = require('gulp-babel');
 
 var config = {
   srcPath: 'src/',
@@ -131,6 +132,8 @@ gulp.task('js', function() {
     '!'+config.srcPath+'templates/**/*.*',
     '!'+config.srcPath+'components/**/*.*'
   ])
+  //.pipe(print())
+  .pipe(babel({ presets: ['es2015'] }))
   .pipe(gulp.dest(config.distPath))
 });
 
