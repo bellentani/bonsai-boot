@@ -130,11 +130,21 @@ gulp.task('js', function() {
   return gulp.src([
     config.srcPath+'**/*.js',
     '!'+config.srcPath+'templates/**/*.*',
-    '!'+config.srcPath+'components/**/*.*'
+    '!'+config.srcPath+'components/**/*.*',
+    '!'+config.srcPath+'js/es2015/**/*.*'
+  ])
+  //.pipe(print())
+  //.pipe(babel({ presets: ['es2015'] }))
+  .pipe(gulp.dest(config.distPath))
+});
+
+gulp.task('js-babel', function() {
+  return gulp.src([
+    config.srcPath+'js/es2015/**/*.js'
   ])
   //.pipe(print())
   .pipe(babel({ presets: ['es2015'] }))
-  .pipe(gulp.dest(config.distPath))
+  .pipe(gulp.dest(config.distPath+'js'))
 });
 
 gulp.task('useref', function(){
@@ -225,7 +235,7 @@ gulp.task('copy-templates', function() {
 gulp.task('watch', ['browserSync', 'clean:dist'], function(callback){
 
   runSequence('hbs', //clean:dist e a task original aqui, removida porque deu problema no windows
-    ['compass', 'js', 'images', 'fonts', 'root-files', 'sample-files'],
+    ['compass', 'js', 'js-babel', 'images', 'fonts', 'root-files', 'sample-files'],
     'clean-templates',
     callback
   );
@@ -243,8 +253,12 @@ gulp.task('watch', ['browserSync', 'clean:dist'], function(callback){
   gulp.watch([
     config.srcPath+'**/*.js',
     '!'+config.srcPath+'templates/**/*.*',
-    '!'+config.srcPath+'components/**/*.*'
+    '!'+config.srcPath+'components/**/*.*',
+    '!'+config.srcPath+'js/es2015/**/*.*'
   ], ['js']);
+  gulp.watch([
+    config.srcPath+'js/es2015/**/*.*'
+  ], ['js-babel']);
   gulp.watch([
     config.srcPath+'**/*.{png,jpg,gif,svg}',
     '!'+config.srcPath+'fonts/**/*.*'
@@ -269,6 +283,7 @@ gulp.task('build', function (callback) {
     'compass',
     'clean-templates',
     'js',
+    'js-babel',
     'images',
     'fonts',
     'sample-files',

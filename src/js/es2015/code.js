@@ -1,6 +1,9 @@
 //
 // codes.js
 //
+
+const varDeTeste = 'uma string';
+
 export class TapeMachine{
     constructor(){
         this.recordedMessage = '';
@@ -12,3 +15,5 @@ export class TapeMachine{
         console.log(this.recordedMessage);
     }
 }
+
+console.log(varDeTeste);
