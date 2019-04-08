@@ -1,14 +1,16 @@
-//Geral para o app
 var express = require('express');
-var flash    = require('connect-flash');
+var path = require('path');
 var app = express();
-
+var port = process.env.PORT || 5000;
 //Middleware
-app.set('port', process.env.PORT || 5000);
+app.set('port', port);
 
-app.use(express.static(__dirname + '/')); //determina o conteúdo estático
-app.use(flash());
+app.use(express.static(path.join(__dirname, 'dist'))); //determina o conteúdo estático
 
-app.listen(app.get('port'), function() {
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
+app.listen(port, function() {
   console.log('Node está brincando na porta ' + app.get('port'));
 });
