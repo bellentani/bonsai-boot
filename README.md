@@ -35,7 +35,7 @@ Baixe o projeto e dê:
 
 As tarefas estão em fase inicial, mas já dá pra utilizá-las para desenvolvimento.
 
-### Converte Sass com 'node-sass', 'bourbon', 'neat', 'autoprefixer' e 'sourcemaps'
+### Converte Sass com 'node-sass', 'autoprefixer' e 'sourcemaps'
 
 ``gulp css``
 
