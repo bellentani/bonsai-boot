@@ -80,7 +80,6 @@ var bannerDivHeight = document.querySelector('[data-section="banner"]').clientHe
 var aboutDivHeight = document.querySelector('[data-section="about"]').clientHeight;
 var servicesDivHeight = document.querySelector('[data-section="services"]').clientHeight;
 var clientsDivHeight = document.querySelector('[data-section="clients"]').clientHeight;
-var contactDivHeight = document.querySelector('[data-section="contact"]').clientHeight;
 
 // window.addEventListener('resize', function (e) {
 //   bannerDivHeight = document.querySelector('[data-section="banner"]').clientHeight;
@@ -94,7 +93,7 @@ var scroll = new SmoothScroll('a[href*="#"]');
 new ScrollMagic.Scene({ triggerElement: "[data-section='banner']", duration: bannerDivHeight })
   .setClassToggle('#home-link', "active")
   .addTo(controller);
-new ScrollMagic.Scene({ triggerElement: "[data-section='about']", duration: aboutDivHeight + servicesDivHeight + contactDivHeight})
+new ScrollMagic.Scene({ triggerElement: "[data-section='about']", duration: aboutDivHeight + servicesDivHeight })
   .setClassToggle('#about-link', "active")
   .addTo(controller);
 // new ScrollMagic.Scene({ triggerElement: "[data-section='services']", duration: servicesDivHeight })
@@ -103,9 +102,6 @@ new ScrollMagic.Scene({ triggerElement: "[data-section='about']", duration: abou
 // new ScrollMagic.Scene({ triggerElement: "[data-section='clients']", duration: clientsDivHeight })
 //   .setClassToggle('#clients-link', "active")
 //   .addTo(controller);
-new ScrollMagic.Scene({ triggerElement: "[data-section='contact']", duration: contactDivHeight })
-.setClassToggle('#contact-link', "active")
-.addTo(controller);
 
 
 //add animate.css

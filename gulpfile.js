@@ -43,6 +43,9 @@ const path = {
   },
   app: 'app'
 };
+const files = {
+  types: 'ico,jpg,png,gif,svg,ico,txt,xml,ttf,woff,woff2,eot'
+};
 
 // BrowserSync (callback)
 function browserSync(done) {
@@ -228,8 +231,8 @@ function watchFiles() {
   gulp.watch(path.src.js+'/**/*.js', gulp.series(scriptsLint, scripts));
 
   gulp.watch([
-    path.src.root+'/*.{ico,jpg,png,gif,txt,xml}',
-    '!'+path.src.root+'/*.+(zip|rar|psd|ai|pdf)'
+    path.src.root+'**/*.{'+files.types+'}',
+    '!'+path.src.root+'**/*.+(zip|rar|psd|ai|pdf)'
   ], copyFiles);
 
   //global watch
