@@ -18,6 +18,7 @@ const htmlbeautify = require('gulp-html-beautify');
 const useref = require('gulp-useref');
 const gulpIf = require('gulp-if');
 const uglify = require('gulp-uglify');
+const imagemin = require('gulp-imagemin');
 // const webpack = require("webpack");
 // const webpackconfig = require("./webpack.config.js");
 // const webpackstream = require("webpack-stream");
@@ -28,6 +29,7 @@ const path = {
     root: 'design/src',
     font: 'design/src/fonts',
     img: 'design/src/img',
+    video: 'design/src/video',
     js: 'design/src/js',
     samples: 'design/src/samples',
     sass: 'design/src/sass',
@@ -37,11 +39,15 @@ const path = {
     root: 'design/dist',
     font: 'design/dist/fonts',
     img: 'design/dist/img',
+    video: 'design/dist/video',
     js: 'design/dist/js',
     samples: 'design/dist/samples',
     css: 'design/dist/css'
   },
-  app: 'app'
+  app: {
+    static: 'public/',
+    app: 'app/'
+  }
 };
 const files = {
   types: 'ico,jpg,png,gif,svg,ico,txt,xml,ttf,woff,woff2,eot'
@@ -78,7 +84,7 @@ var sassOptions = {
 };
 // CSS task
 var autoprefixerOptions = {
-  browsers: ['last 5 versions', '> 5%', 'Firefox ESR']
+  //overrideBrowserslist: ['last 5 versions', '> 5%', 'Firefox ESR']
 };
 function css() {
   return gulp
@@ -120,10 +126,31 @@ function copyFiles(done) {
   ])
   .pipe(gulp.dest(path.dist.samples))
 
+  // gulp.src([
+  //   path.src.img+'/**/*.{png,jpg,gif,svg,ico}'
+  // ])
+  // .pipe(gulp.dest(path.dist.img))
+
   gulp.src([
-    path.src.img+'/**/*.{png,jpg,gif,svg,ico}'
+    path.src.video+'/**/*.*'
   ])
-  .pipe(gulp.dest(path.dist.img))
+  .pipe(gulp.dest(path.dist.video))
+
+  done();
+}
+
+function imgSquash() {
+  return gulp.src(path.src.img+"/**/*.{png,jpg,gif,svg,ico}")
+  .pipe(imagemin())
+  .pipe(gulp.dest(path.dist.img+"/"));
+}
+
+function deployStatic(done) {
+  gulp.src([
+    path.dist.root+'/**/*',
+    '!'+path.dist.root+'/*.+(zip|rar|psd|ai|pdf)'
+  ])
+  .pipe(gulp.dest(path.app.static));
 
   done();
 }
@@ -235,6 +262,9 @@ function watchFiles() {
     '!'+path.src.root+'**/*.+(zip|rar|psd|ai|pdf)'
   ], copyFiles);
 
+  
+  gulp.watch(path.src.img+'/**/*.{png,jpg,gif,svg,ico}', imgSquash);
+
   //global watch
   gulp.watch(
     [
@@ -250,12 +280,11 @@ function watchFiles() {
     ],
     gulp.series(browserSyncReload)
   );
-  //gulp.watch("./assets/img/**/*", images);
 }
 
 // define complex tasks
 const js = gulp.series(scriptsLint, scripts);
-const build = gulp.series(clean, gulp.parallel(css, hbs, js, copyFiles));
+const build = gulp.series(clean, gulp.parallel(imgSquash, css, hbs, js, copyFiles));
 const watch = gulp.series(build, gulp.parallel(watchFiles, assetsBundle, browserSync));
 
 // export tasks
@@ -267,5 +296,7 @@ exports.js = js;
 exports.jekyll = jekyll;
 exports.clean = clean;
 exports.build = build;
+exports.deploy = deployStatic;
 exports.watch = watch;
+exports.imgSquash = imgSquash;
 exports.default = watch;
